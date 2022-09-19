@@ -174,6 +174,38 @@ const app = () => {
 ```
 In such cases, the component will be rendered as it should.
 
+### work with array
+`example`
+
+```
+const comp = (props) => {
+    return {
+        tag: "p",
+        child: [
+            "here : " + props.name
+        ]
+    }
+}
+
+const app = () => {
+    const name = ["name1", "name2", "name3"];
+    return {
+        tag: "div",
+        child: [
+            name.map((item) => {
+                return {
+                    tag: comp,
+                    props: {
+                        name: item
+                    }   
+                }
+            })
+        ]
+    }
+}
+```
+
+
 ### Specific tags
 
 You can prescribe tags like <br > <hr /> immediately, bypassing the usual notation, the builder will reconvert your theme into a understandable for the builder
