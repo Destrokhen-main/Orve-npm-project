@@ -15,17 +15,30 @@ const comp = () => {
       {
         tag: "span",
         props: {
-          class: "label"
+          class: () => {
+            return "label"
+          }
         },
         child: [
           "Привет, это simple reactive",
           "<br />",
-          "Я только разрабатываюсь, но уже кое что умею",
-          "<br/>",
+          {
+            tag: "div",
+            props: {
+              style: "margin: 10px 0;"
+            },
+            child: [
+              "Я только разрабатываюсь, но уже кое что умею"
+            ]
+          },
+          "<hr />",
           {
             tag:"button",
             props: {
-              "@click": function () {console.log("hi")}
+              "@click": function () {
+                console.log("click");
+              },
+              class: "btn"
             },
             child: [
               "say hi"

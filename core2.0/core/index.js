@@ -11,6 +11,7 @@ const mounter = (query) => {
 
 export default (app) => {
   NODE_THREE = builder(app);
+  console.log(NODE_THREE);
   return {
     mount: mounter
   };

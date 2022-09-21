@@ -27,6 +27,12 @@ const validatorProps = (props) => {
   });
 }
 
+const CORRECT_PROPS_FUNCTION = ["string", "proxy", "number"];
+const validSingleProps = (prop, pr) => {
+  if (!CORRECT_PROPS_FUNCTION.includes(typeOf(prop)))
+    error(`${pr} - ${errorMessage.incorrectPropsValue}`);
+}
+
 const validatorChild = (childs) => {
   childs = childs.flat(1);
   if (typeOf(childs) !== "array") error(`${childs} - ${errorMessage.childNotArray}`);
@@ -80,5 +86,6 @@ const validatorTagNode = (node) => {
 export {
   validatorMainNode,
   validateChildFunction,
-  validatorTagNode
+  validatorTagNode,
+  validSingleProps
 }

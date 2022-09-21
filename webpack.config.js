@@ -57,6 +57,7 @@ module.exports = {
     compress: true,
     magicHtml: true,
     historyApiFallback: true,
+    liveReload: true,
     client: {
       logging: 'warn',
       overlay: {

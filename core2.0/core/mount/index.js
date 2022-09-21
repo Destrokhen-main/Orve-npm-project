@@ -1,6 +1,7 @@
 import error from "../error";
-import { typeOf, isTypeOfProxyValue } from "../helper";
+import { typeOf } from "../helper";
 import Type from "../builder/type";
+import { validSingleProps } from "../linter"
 
 const addProps = (tag, props) => {
   Object.keys(props).forEach((pr) => {
@@ -12,7 +13,13 @@ const addProps = (tag, props) => {
       const name = pr.replace("@", "").trim();
       tag.addEventListener(name, props[pr]);
     } else {
-      tag.setAttribute(pr, props[pr]);
+      if (typeOf(props[pr]) === "function") {
+        const parsedProp = props[pr]();
+        validSingleProps(parsedProp, pr);
+        tag.setAttribute(pr, parsedProp);
+      } else {
+        tag.setAttribute(pr, props[pr]);
+      }
     }
   })
 }
