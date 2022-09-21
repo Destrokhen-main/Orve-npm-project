@@ -29,14 +29,24 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           "style-loader",
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+            }
+          }
         ]
       },
       {
         test: /\.css$/i,
         use: [
           "style-loader",
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+            }
+          }
         ]
       },
       {

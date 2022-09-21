@@ -49,7 +49,7 @@ const comp = () => {
       {
         tag: "a",
         props: {
-          href: "https://github.com/Destrokhen-main",
+          href: "https://github.com/Destrokhen-main/simple-reactive-cli",
           target: "_blank"
         },
         child: [
