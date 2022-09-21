@@ -53,7 +53,8 @@ if you write @ in front of the key name in the prop, you will add a listener to 
 props: {
     id: "id",
     class: "class",
-    @click: function () {}
+    @click: function () {},
+    key: () => { return "" or 123}
 }
 ```
 
