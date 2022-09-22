@@ -40,7 +40,6 @@ const comp = () => {
             tag:"button",
             props: {
               "@click": function () {
-                console.log(this)
                 console.log("click");
               },
               class: "btn"
