@@ -10,7 +10,9 @@ const message = {
   unsupportedTag: "Тип данных ребёнка не устраивает",
   unsupportedTagC: "Tag может хранить в себе либо string или function",
   usedFunctionTagWithChildren: "Если вы прописываете в tag component, тогда использовать детей невозможно",
-  functionInTagReturn: "Функция в tag вернула не объект"
+  functionInTagReturn: "Функция в tag вернула не объект",
+  functionReturnUndefinedOrNull : "Функция вернула undefined или null",
+  functionReturnIncorrectData: "Функция вернула некоретный ответ"
 }
 
 export default message;

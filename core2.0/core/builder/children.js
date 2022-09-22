@@ -1,5 +1,5 @@
 import { typeOf } from "../helper";
-import { validatorTagNode } from "../linter";
+import { validatorTagNode, validateFunctionAnswer } from "../linter";
 import Type from "./type";
 import error from "../error";
 import TYPE_MESSAGE from "../errorMessage";
@@ -72,6 +72,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
       if (typeChild === "function") {
         const completeFunction = nodeProps !== undefined ? child(nodeProps) : child();
         const typeCompleteFunction = typeOf(completeFunction);
+        validateFunctionAnswer(completeFunction, index);
         if (typeCompleteFunction === "object") {
           validatorTagNode(completeFunction);
           if (completeFunction["child"] !== undefined)
@@ -93,6 +94,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
             reload: function () {}
           }
         }
+
       }
     });
   } else {

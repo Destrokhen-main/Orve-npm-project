@@ -56,12 +56,19 @@ const validatorMainNode = (node) => {
   if(child !== undefined) validatorChild(child);
 }
 
-const SUPPORTED_CHILD_RESULT = ["string", "object"];
+const SUPPORTED_CHILD_RESULT = ["string", "object", "array"];
 
 const validateChildFunction = (res, index) => {
   const typeResult = typeOf(res);
   if (!SUPPORTED_CHILD_RESULT.includes(typeResult)) error(`${res} | номер в массиве: ${index} - ${errorMessage.unsupportedTagC}`);
   return typeResult;
+}
+
+const CORRECT_ANSWER = ["array", "string", "object", "number", "proxy"];
+const validateFunctionAnswer = (res, index) => {
+  if (res === undefined) error(`${res} | номер в массиве: ${index} - ${errorMessage.functionReturnUndefinedOrNull}`);
+  const type = typeOf(res);
+  if (!CORRECT_ANSWER.includes(type)) error(`${res} | номер в массиве: ${index} - ${errorMessage.functionReturnIncorrectData}`)
 }
 
 const TAG_TYPE_NODE = ["string", "function"];
@@ -87,5 +94,6 @@ export {
   validatorMainNode,
   validateChildFunction,
   validatorTagNode,
-  validSingleProps
+  validSingleProps,
+  validateFunctionAnswer
 }
