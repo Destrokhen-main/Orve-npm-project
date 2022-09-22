@@ -8,7 +8,7 @@ const App = () => {
       class: "app block",
     },
     child: [
-      helloWorld
+      helloWorld,
     ]
   }
 }

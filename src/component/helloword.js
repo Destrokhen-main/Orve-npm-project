@@ -1,3 +1,13 @@
+const img = () => {
+  return {
+    tag: "img",
+    props: {
+      src: require("../assets/logo.png"),
+      class: "img"
+    }
+  }
+}
+
 const comp = () => {
   return {
     tag: "div",
@@ -5,17 +15,11 @@ const comp = () => {
       class: "block"
     },
     child: [
-      {
-        tag: "img",
-        props: {
-          src: require("../assets/logo.png"),
-          class: "img"
-        }
-      },
+      img,
       {
         tag: "span",
         props: {
-          class: () => {
+          class: function () {
             return "label"
           }
         },
@@ -36,6 +40,7 @@ const comp = () => {
             tag:"button",
             props: {
               "@click": function () {
+                console.log(this)
                 console.log("click");
               },
               class: "btn"

@@ -8,21 +8,23 @@ import Type from "./type"
 
 import reqChild  from "./children";
 
-const func = (app) => {
-  if (typeOf(app) !== "function") error(`${app} - ${errorMessage.appNotAFunction}`);
+export default (app) => {
+  if (typeOf(app) !== "function")
+    error(`${app} - ${errorMessage.appNotAFunction}`);
+  
   const mainNode = app();
-  if (typeOf(mainNode) !== "object") error(`${mainNode} - ${errorMessage.resultCallNotAObject}`);
+  if (typeOf(mainNode) !== "object")
+    error(`${mainNode} - ${errorMessage.resultCallNotAObject}`);
 
   // check mainNode
   validatorMainNode(mainNode);
 
   let {props, child} = mainNode;
   if (child !== undefined) {
-    child = child.flat(1);
+    child = child.flat();
     mainNode["child"] = reqChild(props, child);
   }
   mainNode["type"] = Type.Component;
+  mainNode["reload"] = function() {};
   return mainNode;
 }
-
-export default func;

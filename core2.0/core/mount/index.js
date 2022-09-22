@@ -3,7 +3,7 @@ import { typeOf } from "../helper";
 import Type from "../builder/type";
 import { validSingleProps } from "../linter"
 
-const addProps = (tag, props) => {
+const addProps = (tag, props, node) => {
   Object.keys(props).forEach((pr) => {
     if (pr === "src") {
       const img = props[pr].default.split("/");
@@ -11,10 +11,12 @@ const addProps = (tag, props) => {
       tag.setAttribute(pr, img.join('/'));
     } else if (pr.startsWith("@")) {
       const name = pr.replace("@", "").trim();
-      tag.addEventListener(name, props[pr]);
+      const func = props[pr].bind(node);
+      tag.addEventListener(name, func);
     } else {
       if (typeOf(props[pr]) === "function") {
-        const parsedProp = props[pr]();
+        const func = props[pr].bind(node);
+        const parsedProp = func();
         validSingleProps(parsedProp, pr);
         tag.setAttribute(pr, parsedProp);
       } else {
@@ -25,13 +27,14 @@ const addProps = (tag, props) => {
 }
 
 const addChild = (app, child) => {
-  child.forEach(ch => {
+  return child.map(ch => {
     if (ch.type === Type.NotMutable) {
       app.innerHTML += ch.value;
+      return ch;
     }
 
     if (ch.type === Type.Component || ch.type === Type.ComponentMutable) {
-      createNode(app, ch.value);
+      return createNode(app, ch.value);
     }
   })
 }
@@ -41,23 +44,23 @@ const createNode = (app, node) => {
   const Tag = document.createElement(tag);
 
   if (props !== undefined && Object.keys(props).length > 0) {
-    addProps(Tag, props);
+    addProps(Tag, props, node);
   }
   
   if (child !== undefined && child.length > 0) {
-    addChild(Tag, child);
+    node["child"] = addChild(Tag, child);
   }
-
+  node["node"] = Tag;
   app.appendChild(Tag);
+  return node;
 }
 
-const mainBuilder = (app, node) => {
-  createNode(app, node);
-}
-
-export default (node, query) => {
+export default (query) => {
   const APP = document.querySelector(query);
-  
-  if (APP === null) error("Не смог найти tag " + query);
-  mainBuilder(APP, node);
+  const node = window.sReactDOM;
+
+  if (APP === null)
+    error("Не смог найти tag " + query);
+
+  return createNode(APP, node);
 }

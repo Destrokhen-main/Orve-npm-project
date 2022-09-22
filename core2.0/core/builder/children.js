@@ -8,20 +8,26 @@ const HTML_TAG = ["br","hr"];
 
 const recursiveChild = (nodeProps = null, nodeChilds) => {
   if (nodeChilds !== undefined && nodeChilds.length > 0) {
+    nodeChilds = nodeChilds.flat();
     return nodeChilds.map((child, index) => {
       const typeChild = typeOf(child);
 
       if (typeChild === "string") {
         if (child.startsWith("<") && child.endsWith(">")) {
-          const parsedTag = child.replace(/[<,>,\/]/, "").trim();
+          const parsedTag = child.replace(/[<,>,\/]/gm, "").trim();
           if (HTML_TAG.includes(parsedTag)) {
             return {
               type: Type.Component,
               value: {
-                tag: "parsedTag",
+                tag: parsedTag,
               }
             }
           }
+        } else if (
+          child.startsWith("<") && !child.endsWith(">") ||
+          !child.startsWith("<") && child.endsWith(">")
+        ) {
+          error(`${child} - не используйте "<",">" отдельно в название`);
         }
       }
 
@@ -38,6 +44,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
         if(typeof child["tag"] === "function") {
           const completeFunction = child["props"] !== undefined ? child["tag"](child["props"]) : child["tag"]();
           const typeCompleteFunction = typeOf(completeFunction);
+          
           if (typeCompleteFunction !== "object") {
             error(`index in array ${index} - ${TYPE_MESSAGE.functionInTagReturn}`);
           }
@@ -48,6 +55,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
           return {
             type: Type.Component,
             value: completeFunction,
+            reload: function () {}
           }
         } else {
           if (child["child"] !== undefined)
@@ -56,7 +64,8 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
 
         return {
           type: Type.Component,
-          value: child
+          value: child,
+          reload: function () {}
         }
       }
 
@@ -72,6 +81,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
             type: Type.ComponentMutable,
             value:completeFunction,
             function: child,
+            reload: function () {}
           }
         }
 
@@ -79,7 +89,8 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
           return {
             type: Type.Mutable,
             value: completeFunction,
-            function: child
+            function: child,
+            reload: function () {}
           }
         }
       }
