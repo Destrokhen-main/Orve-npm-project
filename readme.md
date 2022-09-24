@@ -54,7 +54,8 @@ props: {
     id: "id",
     class: "class",
     @click: function () {},
-    key: () => { return "" or 123}
+    key: () => { return "" or 123},
+    style: "padding-left: 10px" OR { paddingLeft: "10px" }
 }
 ```
 
