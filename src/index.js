@@ -1,4 +1,4 @@
-import { createApp } from "../core2.0";
+import { createApp } from "../core";
 
 import App from "./app";
 
