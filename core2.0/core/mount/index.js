@@ -1,7 +1,8 @@
 import error from "../error";
 import { typeOf } from "../helper";
 import Type from "../builder/type";
-import { validSingleProps } from "../linter"
+import { validSingleProps } from "../linter";
+const toStyleString = require('to-style').string;
 
 const addProps = (tag, props, node) => {
   Object.keys(props).forEach((pr) => {
@@ -13,7 +14,16 @@ const addProps = (tag, props, node) => {
       const name = pr.replace("@", "").trim();
       const func = props[pr].bind(node);
       tag.addEventListener(name, func);
-    } else {
+    } else if (pr === "style") {
+      let sheet;
+      if (typeOf(props[pr]) === "string") {
+        sheet = props[pr];
+      } else {
+        sheet = toStyleString(props[pr]);
+      }
+      
+      tag.setAttribute("style", sheet);
+    } else  {
       if (typeOf(props[pr]) === "function") {
         const func = props[pr].bind(node);
         const parsedProp = func();
