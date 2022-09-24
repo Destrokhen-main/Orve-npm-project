@@ -23,7 +23,7 @@ const validatorProps = (props) => {
       if (key === "src") {
         if (value["__esModule"] !== undefined && value["default"] === undefined)
           error(`${key} - ${errorMessage.incorrectPropsValue}`)
-      }
+      } 
     } else if (!SUPPORTED_TYPE_PROPS.includes(typeOf(value)))
       error(`${key} - ${errorMessage.incorrectPropsValue}`);
   });

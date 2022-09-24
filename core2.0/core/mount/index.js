@@ -21,8 +21,8 @@ const addProps = (tag, props, node) => {
       } else {
         sheet = toStyleString(props[pr]);
       }
-      
-      tag.setAttribute("style", sheet);
+      if (sheet.length !== 0)
+        tag.setAttribute("style", sheet);
     } else  {
       if (typeOf(props[pr]) === "function") {
         const func = props[pr].bind(node);
