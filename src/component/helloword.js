@@ -12,7 +12,6 @@ const img = () => {
 
 const comp = () => {
   const obj = ref(1);
-  const boolean = ref(true);
 
   return {
     tag: "div",
