@@ -3,7 +3,7 @@ import { typeOf } from "../helper";
 import errorMessage from "../errorMessage";
 
 const SUPPORTED_VARIABLES = ["tag", "props", "child"];
-const SUPPORTED_TYPE_PROPS = ["function", "string", "proxy", "number", "object"];
+const SUPPORTED_TYPE_PROPS = ["function", "string", "proxy", "number", "object", "array"];
 const SUPPORTED_TYPE_CHILDREN = ["function", "string", "proxy", "object", "number"];
 
 

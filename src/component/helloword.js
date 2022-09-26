@@ -1,14 +1,6 @@
 import { ref, watch } from "../../core";
-
-const img = () => {
-  return {
-    tag: "img",
-    props: {
-      src: require("@/assets/logo.png"),
-      class: "img"
-    }
-  }
-}
+import img from "./img";
+import button from "./button";
 
 const comp = () => {
   const obj = ref(1);
@@ -45,16 +37,10 @@ const comp = () => {
           },
           "<hr />",
           {
-            tag:"button",
+            tag: button,
             props: {
-              "@click": function () {
-                console.log("click");
-              },
-              class: "btn"
-            },
-            child: [
-              "say hi"
-            ]
+              text: "say hi"
+            }
           }
         ]
       },
@@ -78,18 +64,15 @@ const comp = () => {
         },
         child: [
           {
-            tag: "button",
+            tag: button,
             props: {
-              style: {
-                cursor: "pointer"
-              }
-            },
-            child: [
-              "you click (",
-              obj,
-              ")"
-            ]
-          },
+              text: [
+                "you click (",
+                obj,
+                ")"
+              ]
+            }
+          }
         ]
       }
     ]
