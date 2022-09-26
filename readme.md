@@ -210,7 +210,7 @@ const app = () => {
 
 ### Specific tags
 
-You can prescribe tags like <br > <hr /> immediately, bypassing the usual notation, the builder will reconvert your theme into a understandable for the builder
+You can prescribe tags like `<br >` `<hr />` immediately, bypassing the usual notation, the builder will reconvert your theme into a understandable for the builder
 
 `example`
 ```

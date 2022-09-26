@@ -44,7 +44,7 @@ const addProps = (tag, props, node) => {
   })
 }
 
-const addChild = (app, child, node) => {
+const addChild = (app, child) => {
   return child.map(ch => {
     if (ch.type === Type.NotMutable) {
       const el = document.createTextNode(ch.value);
