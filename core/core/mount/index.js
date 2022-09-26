@@ -7,6 +7,7 @@ const toStyleString = require('to-style').string;
 const addProps = (tag, props, node) => {
   Object.keys(props).forEach((pr) => {
     if (pr === "src") {
+      // check for function
       const img = props[pr].default.split("/");
       img.splice(0, 3);
       tag.setAttribute(pr, img.join('/'));
@@ -15,6 +16,7 @@ const addProps = (tag, props, node) => {
       const func = props[pr].bind(node);
       tag.addEventListener(name, func);
     } else if (pr === "style") {
+      // check for function
       let sheet;
       if (typeOf(props[pr]) === "string") {
         sheet = props[pr];
@@ -36,7 +38,7 @@ const addProps = (tag, props, node) => {
   })
 }
 
-const addChild = (app, child) => {
+const addChild = (app, child, node) => {
   return child.map(ch => {
     if (ch.type === Type.NotMutable) {
       app.innerHTML += ch.value;
@@ -46,21 +48,32 @@ const addChild = (app, child) => {
     if (ch.type === Type.Component || ch.type === Type.ComponentMutable) {
       return createNode(app, ch.value);
     }
-  })
+
+    if (ch.type === Type.Proxy) {
+      const el = document.createTextNode(ch.value)
+      ch.node = el;
+      ch.proxy.parent.push({
+        type: "child",
+        value: el,
+      });
+      app.appendChild(el); 
+      return ch;
+    }
+  });
 }
 
 const createNode = (app, node) => {
   const { tag, props, child } = node;
   const Tag = document.createElement(tag);
+  node["node"] = Tag;
 
   if (props !== undefined && Object.keys(props).length > 0) {
     addProps(Tag, props, node);
   }
   
   if (child !== undefined && child.length > 0) {
-    node["child"] = addChild(Tag, child);
+    node["child"] = addChild(Tag, child, node);
   }
-  node["node"] = Tag;
   app.appendChild(Tag);
   return node;
 }

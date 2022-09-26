@@ -1,3 +1,5 @@
+import { ref } from "../../core";
+
 const img = () => {
   return {
     tag: "img",
@@ -9,6 +11,8 @@ const img = () => {
 }
 
 const comp = () => {
+  const obj = ref(1);
+
   return {
     tag: "div",
     props: {
@@ -57,7 +61,22 @@ const comp = () => {
           target: "_blank"
         },
         child: [
-          "Вот ссылка на git"
+          "Вот ссылка на git",
+        ]
+      },
+      {
+        tag: "div",
+        props: {
+          "@click": () => {
+            obj.value += 1;
+          }
+        },
+        child: [
+          obj,
+          {
+            tag: "span",
+            child: [" hi "]
+          },
         ]
       }
     ]

@@ -1,5 +1,5 @@
 const isProxy = (obj) => {
-  return obj.tpof === "Proxy" ? true : false; 
+  return obj.type === "proxy" ? true : false; 
 }
 
 const typeOf = (obj) => {
@@ -15,13 +15,7 @@ const typeOf = (obj) => {
   return type;
 }
 
-const isTypeOfProxyValue = (obj) => {
-  if (obj.tppx === "ProxyValue") return true
-  return false;
-}
-
 export {
   isProxy,
   typeOf,
-  isTypeOfProxyValue
 }

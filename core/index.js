@@ -1,6 +1,7 @@
 import createApp from "./core";
-//import reactive from "./core/reactive";
+import { ref } from "./reactive";
 
 export {
   createApp,
+  ref
 }

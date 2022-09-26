@@ -96,6 +96,14 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
         }
 
       }
+
+      if (typeChild === "proxy") {
+        return {
+          type: Type.Proxy,
+          value: child.value,
+          proxy: child
+        }
+      }
     });
   } else {
     return [];
