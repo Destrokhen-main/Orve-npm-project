@@ -2,7 +2,7 @@ const img = () => {
   return {
     tag: "img",
     props: {
-      src: require("../assets/logo.png"),
+      src: require("@/assets/logo.png"),
       class: "img"
     }
   }

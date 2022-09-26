@@ -2,6 +2,7 @@ const package = require('root-require')('package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDevServer = require('webpack-dev-server');
 const log = require('log-beautify');
+const path = require("path");
 
 const object = {
   name: package.name,
@@ -88,5 +89,10 @@ module.exports = {
       console.log(`\tlocal ip-v4: \thttp://${ipv4}:${port}`);
       console.log(`\tlocal ip-v6: \thttp://[${ipv6}]:${port}`)
     }
-  }
+  },
+  resolve: {
+    alias: {
+      "@" : path.resolve(__dirname, './src/'),
+    },
+  },
 }
