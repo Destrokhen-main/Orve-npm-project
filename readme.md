@@ -279,7 +279,20 @@ val.value = some value
 }
 ```
 
+### watch
+You can watch the ref change
 
+```
+watch(callback, ref);
+```
+
+`example`
+```
+const app = () => {
+    const o = ref(1)
+    watch((new, old) => {...}, o)
+}
+```
 
 ### Operating modes
 You can start your local server with the command
