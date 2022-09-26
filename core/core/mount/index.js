@@ -8,9 +8,8 @@ const addProps = (tag, props, node) => {
   Object.keys(props).forEach((pr) => {
     if (pr === "src") {
       // check for function
-      const img = props[pr].default.split("/");
-      img.splice(0, 3);
-      tag.setAttribute(pr, img.join('/'));
+      //let img = props[pr].default.split("/");
+      tag.setAttribute(pr, props[pr].default);
     } else if (pr.startsWith("@")) {
       const name = pr.replace("@", "").trim();
       const func = props[pr].bind(node);

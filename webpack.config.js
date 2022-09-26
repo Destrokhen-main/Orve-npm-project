@@ -12,7 +12,6 @@ const object = {
 console.clear()
 module.exports = {
   entry: __dirname + '/src/index.js',
-  mode: "development",
   stats: 'errors-only',
   output: {
     path: __dirname + '/dist',
