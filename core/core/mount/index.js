@@ -25,6 +25,13 @@ const addProps = (tag, props, node) => {
       }
       if (sheet.length !== 0)
         tag.setAttribute("style", sheet);
+    } else if (typeOf(props[pr]) === "proxy") {
+      tag.setAttribute(pr, props[pr].value);
+      props[pr].parent.push({
+        type: "props",
+        value: tag,
+        key: pr
+      })
     } else  {
       if (typeOf(props[pr]) === "function") {
         const func = props[pr].bind(node);

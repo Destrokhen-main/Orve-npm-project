@@ -12,6 +12,7 @@ const img = () => {
 
 const comp = () => {
   const obj = ref(1);
+  const boolean = ref(true);
 
   return {
     tag: "div",
@@ -61,7 +62,7 @@ const comp = () => {
           target: "_blank"
         },
         child: [
-          "Вот ссылка на git",
+          "Вот ссылка на git ",
         ]
       },
       {
@@ -69,7 +70,8 @@ const comp = () => {
         props: {
           "@click": () => {
             obj.value += 1;
-          }
+          },
+          id: obj,
         },
         child: [
           obj,

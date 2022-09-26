@@ -21,6 +21,9 @@ const f = (object) => {
                 el.value.nodeValue = value;
               }
             }
+            if (el.type === "props") {
+              el.value.setAttribute(el.key, value);
+            }
           });
         }
 
