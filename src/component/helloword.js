@@ -78,17 +78,18 @@ const comp = () => {
         },
         child: [
           {
-            tag: "stan",
+            tag: "button",
             props: {
               style: {
                 cursor: "pointer"
               }
             },
             child: [
-              "click "
+              "you click (",
+              obj,
+              ")"
             ]
           },
-          obj,
         ]
       }
     ]

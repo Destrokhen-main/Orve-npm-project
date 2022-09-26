@@ -47,7 +47,8 @@ const addProps = (tag, props, node) => {
 const addChild = (app, child, node) => {
   return child.map(ch => {
     if (ch.type === Type.NotMutable) {
-      app.innerHTML += ch.value;
+      const el = document.createTextNode(ch.value);
+      app.appendChild(el);
       return ch;
     }
 
