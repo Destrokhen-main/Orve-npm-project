@@ -242,6 +242,45 @@ this also works for all html tags
 supported types 
 `ico png jpg jpeg svg gif`
 
+### ref
+
+You can create a reactive object with type (number, string, booalen)
+
+You need to connect a function for this
+
+```
+import { ref } from "../../core";
+```
+
+init
+```
+const obj = ref(1);
+```
+
+For modification, you need to refer to the value field
+
+```
+val.value = some value
+```
+
+`example`
+```
+{
+    tag: "div",
+    props: {
+        "@click": () => {
+            obj.value += 1;
+        },
+        id: obj,
+    },
+    child: [
+        obj,
+    ]
+}
+```
+
+
+
 ### Operating modes
 You can start your local server with the command
 ```

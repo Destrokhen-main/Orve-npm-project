@@ -74,11 +74,18 @@ const comp = () => {
           id: obj,
         },
         child: [
-          obj,
           {
-            tag: "span",
-            child: [" hi "]
+            tag: "stan",
+            props: {
+              style: {
+                cursor: "pointer"
+              }
+            },
+            child: [
+              "click "
+            ]
           },
+          obj,
         ]
       }
     ]
