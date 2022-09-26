@@ -1,4 +1,4 @@
-import { ref } from "../../core";
+import { ref, watch } from "../../core";
 
 const img = () => {
   return {
@@ -12,6 +12,10 @@ const img = () => {
 
 const comp = () => {
   const obj = ref(1);
+
+  watch((n, o) => {
+    console.log(`new ${n}, old ${o}`)
+  }, obj);
 
   return {
     tag: "div",

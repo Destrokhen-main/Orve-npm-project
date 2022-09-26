@@ -15,6 +15,8 @@ const f = (object) => {
       if (prop in target) {
         if (prop === "value") {
           const parents = target.parent;
+          const before = target[prop];
+          target[prop] = value;
           parents.forEach((el) => {
             if (el.type === "child") {
               if (el.value.nodeType === 3) {
@@ -24,10 +26,12 @@ const f = (object) => {
             if (el.type === "props") {
               el.value.setAttribute(el.key, value);
             }
+
+            if (el.type === "watch") {
+              el.function(value, before);
+            }
           });
         }
-
-        target[prop] = value;
         return true;
       } else {
         return false;
