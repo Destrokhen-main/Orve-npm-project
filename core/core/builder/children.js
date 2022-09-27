@@ -3,8 +3,11 @@ import { validatorTagNode, validateFunctionAnswer } from "../linter";
 import Type from "./type";
 import error from "../error";
 import TYPE_MESSAGE from "../errorMessage";
+import TypeProxy from "../../type/proxy";
 
 const HTML_TAG = ["br","hr"];
+
+import builder from "../builder";
 
 const recersiveCheckFunctionAnswer = (node) => {
   let haveDop = false;
@@ -92,7 +95,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
             ...functionObject
           }) : child["tag"]();
           const typeCompleteFunction = typeOf(completeFunction);
-          
+
           if (typeCompleteFunction !== "object") {
             error(`index in array ${index} - ${TYPE_MESSAGE.functionInTagReturn}`);
           }
@@ -105,7 +108,6 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
 
           if (completeFunction["child"] !== undefined)
             completeFunction["child"] = recursiveChild(completeFunction["props"], completeFunction["child"]);
-
           return {
             type: Type.Component,
             value: completeFunction,
@@ -157,10 +159,28 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
       }
 
       if (typeChild === "proxy") {
-        return {
-          type: Type.Proxy,
-          value: child.value,
-          proxy: child
+        const typeProxy = child.typeProxy;
+
+        if (typeProxy === TypeProxy.proxySimple) {
+          return {
+            type: Type.Proxy,
+            value: child.value,
+            proxy: child
+          }
+        }
+
+        if (typeProxy === TypeProxy.proxyComponent) {
+          let result = builder(child.value);
+
+          if (typeof result["tag"] === "function") {
+            result = recersiveCheckFunctionAnswer(result);
+          }
+
+          return {
+            type: Type.ProxyComponent,
+            value: result,
+            proxy: child
+          }
         }
       }
     });

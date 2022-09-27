@@ -1,3 +1,5 @@
+import Type from "../type/proxy";
+
 const f = (object) => {
   const p = {
     parent: [],
@@ -7,6 +9,7 @@ const f = (object) => {
   return new Proxy(p, {
     get(target, prop) {
       if (prop === "type") return "proxy";
+      if (prop === "typeProxy") return Type.proxySimple;
       if (prop in target) {
         return target[prop];
       }

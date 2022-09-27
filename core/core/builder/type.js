@@ -3,5 +3,6 @@ export default {
   Mutable: "mutable",
   Component: "component",
   ComponentMutable: "component-mutable",
-  Proxy: "proxy"
+  Proxy: "proxy",
+  ProxyComponent: "proxy-component"
 }
