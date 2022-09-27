@@ -6,6 +6,37 @@ import TYPE_MESSAGE from "../errorMessage";
 
 const HTML_TAG = ["br","hr"];
 
+const recersiveCheckFunctionAnswer = (node) => {
+  let haveDop = false;
+  let functionObject = {};
+
+  if (node["props"] !== undefined) {
+    functionObject = {
+      ...node["props"]
+    }
+    haveDop = true;
+  }
+
+  if (node["child"] !== undefined) {
+    functionObject["children"] = node['child'];
+    haveDop = true;
+  }
+
+  const completeFunction = haveDop ? node["tag"]({
+    ...functionObject
+  }) : node["tag"]();
+  const typeCompleteFunction = typeOf(completeFunction);
+  if (typeCompleteFunction !== "object") {
+    error(`index in array ${index} - ${TYPE_MESSAGE.functionInTagReturn}`);
+  }
+
+  if (typeof completeFunction["tag"] === "function") {
+    return recersiveCheckFunctionAnswer(completeFunction);
+  }
+
+  return completeFunction;
+}
+
 const recursiveChild = (nodeProps = null, nodeChilds) => {
   if (nodeChilds !== undefined && nodeChilds.length > 0) {
     nodeChilds = nodeChilds.flat();
@@ -57,7 +88,7 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
             haveDop = true;
           }
 
-          const completeFunction = haveDop ? child["tag"]({
+          let completeFunction = haveDop ? child["tag"]({
             ...functionObject
           }) : child["tag"]();
           const typeCompleteFunction = typeOf(completeFunction);
@@ -65,7 +96,13 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
           if (typeCompleteFunction !== "object") {
             error(`index in array ${index} - ${TYPE_MESSAGE.functionInTagReturn}`);
           }
+
+          validatorTagNode(completeFunction);
           
+          if (typeof completeFunction["tag"] === "function") {
+            completeFunction = recersiveCheckFunctionAnswer(completeFunction);
+          }
+
           if (completeFunction["child"] !== undefined)
             completeFunction["child"] = recursiveChild(completeFunction["props"], completeFunction["child"]);
 
@@ -87,11 +124,16 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
       }
 
       if (typeChild === "function") {
-        const completeFunction = nodeProps !== undefined ? child(nodeProps) : child();
+        let completeFunction = nodeProps !== undefined ? child(nodeProps) : child();
         const typeCompleteFunction = typeOf(completeFunction);
         validateFunctionAnswer(completeFunction, index);
         if (typeCompleteFunction === "object") {
           validatorTagNode(completeFunction);
+
+          if (typeof completeFunction["tag"] === "function") {
+            completeFunction = recersiveCheckFunctionAnswer(completeFunction);
+          }
+
           if (completeFunction["child"] !== undefined)
             completeFunction["child"] = recursiveChild(completeFunction["props"], completeFunction["child"]);
 
