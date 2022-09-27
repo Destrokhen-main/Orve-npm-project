@@ -40,7 +40,6 @@ const recursive = (funct) => {
 }
 
 const s = (app) => {
-  (app);
   if (typeOf(app) !== "function")
     error(`${app} - ${errorMessage.appNotAFunction}`);
   
