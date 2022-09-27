@@ -9,7 +9,6 @@ import Type from "./type"
 import reqChild  from "./children";
 
 const recursive = (funct) => {
-  console.log(funct)
   let haveDop = false;
   let functionObject = {};
 
@@ -41,7 +40,7 @@ const recursive = (funct) => {
 }
 
 const s = (app) => {
-  console.log(app);
+  (app);
   if (typeOf(app) !== "function")
     error(`${app} - ${errorMessage.appNotAFunction}`);
   
