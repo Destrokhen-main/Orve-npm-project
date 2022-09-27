@@ -42,7 +42,24 @@ const recursiveChild = (nodeProps = null, nodeChilds) => {
         validatorTagNode(child);
 
         if(typeof child["tag"] === "function") {
-          const completeFunction = child["props"] !== undefined ? child["tag"](child["props"]) : child["tag"]();
+          let haveDop = false;
+          let functionObject = {};
+
+          if (child["props"] !== undefined) {
+            functionObject = {
+              ...child["props"]
+            }
+            haveDop = true;
+          }
+
+          if (child["child"] !== undefined) {
+            functionObject["children"] = child['child'];
+            haveDop = true;
+          }
+
+          const completeFunction = haveDop ? child["tag"]({
+            ...functionObject
+          }) : child["tag"]();
           const typeCompleteFunction = typeOf(completeFunction);
           
           if (typeCompleteFunction !== "object") {

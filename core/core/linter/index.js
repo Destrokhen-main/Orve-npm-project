@@ -84,9 +84,6 @@ const validatorTagNode = (node) => {
   if(tag === undefined) error(errorMessage.missTagOnObject);
 
   if(!TAG_TYPE_NODE.includes(typeOf(tag))) error(`${JSON.stringify(node)} - ${errorMessage.unsupportedTag}`)
-  if(typeOf(tag) === "function") {
-    if (child !== undefined) error(`${tag} - ${errorMessage.usedFunctionTagWithChildren}`);
-  }
 
   if(props !== undefined) validatorProps(props);
   if(child !== undefined) validatorChild(child);
