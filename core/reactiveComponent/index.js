@@ -17,7 +17,6 @@ const s = (component) => {
     parent: [],
     value: comp,
   }
-  console.log(object);
 
   return new Proxy(object, {
     get(target, prop) {
