@@ -1,4 +1,4 @@
-import { createApp } from "../core";
+import { createApp } from "sreact";
 
 import App from "./app";
 

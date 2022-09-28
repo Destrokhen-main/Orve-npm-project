@@ -1,4 +1,4 @@
-import { ref, watch } from "../../core";
+import { ref, watch } from "sreact";
 import img from "./img";
 import button from "./button";
 
