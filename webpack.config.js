@@ -29,9 +29,21 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           "style-loader",
-          "css-loader",
-          "sass-loader"
-        ]
+          {
+           loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ],
+        include: /\.sc\.s[ac]ss$/
       },
       {
         test: /\.css$/i,
@@ -40,10 +52,28 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: false,
+              modules: true,
             }
           }
-        ]
+        ],
+        include: /\.sc\.css$/
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ],
+        exclude: /\.sc\.s[ac]ss$/
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          "style-loader",
+          "css-loader"
+        ],
+        exclude: /\.sc\.css$/
       },
       {
         test: /\.(?:ico|png|jpg|jpeg|svg|gif)$/,
