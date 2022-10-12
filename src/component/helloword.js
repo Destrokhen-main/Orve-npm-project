@@ -1,9 +1,10 @@
 import { ref, watch } from "sreact";
 import img from "./img";
-import button from "./button";
+import button from "./button/button";
 
 const comp = () => {
   const obj = ref(1);
+  const input = ref("");
 
   watch((n, o) => {
     console.log(`new ${n}, old ${o}`)
@@ -72,6 +73,28 @@ const comp = () => {
                 ")"
               ]
             }
+          }
+        ]
+      },
+      {
+        tag: "div",
+        child: [
+          {
+            tag: "p",
+            child: [
+              "Ты написал: ",
+              input,
+              "<br/>",
+              {
+                tag: "input",
+                props: {
+                  placeholder: "Введи что-то",
+                  "@input": (e) => {
+                    input.value = e.target.value;
+                  }
+                }
+              }
+            ]
           }
         ]
       }

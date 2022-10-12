@@ -1,3 +1,5 @@
+import style from "./button.sc.scss";
+
 const button = (props) => {
   return {
     tag: "button",
@@ -5,7 +7,7 @@ const button = (props) => {
       "@click": function () {
         console.log("click");
       },
-      class: "btn"
+      class: style.btn
     },
     child: [
       ...props.text
