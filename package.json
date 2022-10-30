@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "log-beautify": "^1.2.0",
-    "orve": "^0.5.2",
+    "orve": "^0.6.0",
     "root-require": "^0.3.1"
   }
 }
