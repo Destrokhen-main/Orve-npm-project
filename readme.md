@@ -3,10 +3,6 @@
 
 Оbject reactive library. mix of react and vue
 
-```
-npm i orve
-```
-
 <a href="https://github.com/Destrokhen-main/Simple-Reactive-npm" target="_blank">npm package</a>
 
 <a href="https://github.com/Destrokhen-main/Simple-Reactive-doc" target="_blank">Documentation</a>
