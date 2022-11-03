@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDevServer = require('webpack-dev-server');
 const log = require('log-beautify');
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const object = {
   name: package.name,
@@ -22,6 +23,12 @@ module.exports = {
       template:  __dirname + '/public/index.html',
       templateParameters: object,
     }),
+    new CopyPlugin({
+      patterns: [
+        path.resolve(__dirname, "public", "robots.txt"),
+        path.resolve(__dirname, "public", "favicon.ico")
+      ],
+    })
   ],
   module: {
     rules: [
