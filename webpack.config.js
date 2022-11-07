@@ -99,6 +99,7 @@ module.exports = {
       }
     ]
   },
+  devtool: "cheap-source-map",
   devServer: {
     allowedHosts: "all",
     port: "auto", 
