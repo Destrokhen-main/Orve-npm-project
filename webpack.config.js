@@ -99,6 +99,7 @@ module.exports = {
       }
     ]
   },
+  ignoreWarnings: [/Failed to parse source map/],
   devtool: "cheap-source-map",
   devServer: {
     allowedHosts: "all",
