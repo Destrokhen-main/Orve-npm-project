@@ -1,16 +1,14 @@
+import orve from "orve";
+
 import "./style.scss";
-import helloWorld from "./component/helloword";
+import HelloWorld from "./component/helloword";
 
 const App = () => {
-  return {
-    tag: "div",
-    props: {
-      class: "app block",
-    },
-    child: [
-      helloWorld,
-    ]
-  }
+  return (
+    <div class="app block">
+      <HelloWorld /> 
+    </div>
+  )
 }
 
 export default App;

@@ -2,5 +2,4 @@ import { createApp } from "orve";
 
 import App from "./app";
 
-const app = createApp({App});
-app.mount("#app");
+createApp(App).mount("#app");
