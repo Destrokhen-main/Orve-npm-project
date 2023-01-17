@@ -1,5 +1,5 @@
 {
-  "name": "simple-reactive",
+  "name": "orve-template",
   "version": "1.0.0",
   "description": "cli sReact",
   "main": "public/index.js",
