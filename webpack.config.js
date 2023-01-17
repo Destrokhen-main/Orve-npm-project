@@ -96,10 +96,17 @@ module.exports = {
         test: /\.js$/,
         enforce: "pre",
         use: ["source-map-loader"],
+      },
+      {
+        test: /\.js$/i,
+        loader: "babel-loader"
+      },
+      {
+        test: /\.jsx$/i,
+        loader: "babel-loader"
       }
     ]
   },
-  ignoreWarnings: [/Failed to parse source map/],
   devtool: "cheap-source-map",
   devServer: {
     allowedHosts: "all",

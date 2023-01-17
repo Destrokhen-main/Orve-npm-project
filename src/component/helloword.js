@@ -39,9 +39,7 @@ const comp = () => {
           "<hr />",
           {
             tag: button,
-            props: {
-              text: "say hi"
-            }
+            child: "say hi"
           }
         ]
       },
@@ -66,13 +64,11 @@ const comp = () => {
         child: [
           {
             tag: button,
-            props: {
-              text: [
+            child: [
                 "you click (",
                 obj,
                 ")"
               ]
-            }
           }
         ]
       },

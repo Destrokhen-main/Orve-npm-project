@@ -9,9 +9,7 @@ const button = (props) => {
       },
       class: style.btn
     },
-    child: [
-      ...props.text
-    ]
+    child: props.children
   }
 }
 
