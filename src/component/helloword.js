@@ -5,7 +5,7 @@ export default () => {
     <>
       <h1
         style={{
-        fontSize: 64
+        fontSize: "64px"
         }}
       >ORVE</h1>
       <p>create SPA together</p>
